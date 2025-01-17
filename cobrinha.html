@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo da Cobrinha</title>
+    <link rel="stylesheet" href="cobrinha.css" />
+  </head>
+  <body>
+    <section id="gameMenu">
+      <h1 class="gameTitle" id="gameTitle">Snake Game</h1>
+      <h6>by Dev.LipeBlack</h6>
+      <form>
+        <label for="playerName">Nome do Jogador:</label>
+        <input type="text" id="playerName" placeholder="Nome para pontuação" />
+      </form>
+      <button id="startGame">Jogar</button>
+      <button id="themeToggle">Alterar Tema</button>
+      <button id="showCredits">Créditos</button>
+
+      <div id="highScoresList"></div>
+    </section>
+
+    <section id="gameArea" style="display: none">
+      <div id="scoreDisplay"></div>
+      <div id="highScoreDisplay"></div>
+      <canvas id="gameCanvas"></canvas>
+    </section>
+
+    <script src="cobrinha.js"></script>
+    <script src="darktheme.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const highScoresList = document.getElementById("highScoresList");
+        const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+        highScoresList.innerHTML =
+          "<h3>Top 10 Recordes</h3>" +
+          highScores
+            .map(
+              (record, index) =>
+                `<p>${index + 1}. ${record.name}: ${record.score}</p>`
+            )
+            .join("");
+      });
+    </script>
+  </body>
+</html>
